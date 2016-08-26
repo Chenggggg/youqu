@@ -16,7 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.lssdjt.chenggggg.lssdjt.fragment.TextJokeFragment;
+import com.lssdjt.chenggggg.lssdjt.fragment.IntrestingFragment;
 
 import java.util.ArrayList;
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private void initFragment() {
         mFragments = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            mFragments.add(new TextJokeFragment());
+            mFragments.add(new IntrestingFragment());
         }
     }
 
