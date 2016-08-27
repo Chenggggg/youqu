@@ -75,6 +75,7 @@ public class JokeDataFactory {
 
 
     private class GetTextJokeSyncTask extends AsyncTask<String, Void, String> {
+        
         String currentPage = String.valueOf(page);
 
         @Override
