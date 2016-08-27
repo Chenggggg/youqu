@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class IntrestingFragment extends Fragment {
     private ViewPager mViewPager;
     private TabLayout mTab;
     private View mView;
+    private SwipeRefreshLayout mRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,10 +40,11 @@ public class IntrestingFragment extends Fragment {
         mViewPager = (ViewPager) mView.findViewById(R.id.vp_main);
         mTab = (TabLayout) mView.findViewById(R.id.tab_intrested);
         mTab.setTabGravity(TabLayout.GRAVITY_FILL);
-
         mTab.setTabMode(TabLayout.MODE_FIXED);
         mViewPager.setAdapter(new IntrestAdapter(getContext()));
         mTab.setupWithViewPager(mViewPager);
+
+        mRefreshLayout = (SwipeRefreshLayout)mView.findViewById(R.id.swipe_refresh_layout);
     }
 
 }

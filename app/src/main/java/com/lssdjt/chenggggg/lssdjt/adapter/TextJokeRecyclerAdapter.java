@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.lssdjt.chenggggg.lssdjt.R;
 import com.lssdjt.chenggggg.lssdjt.domain.TextJokeBean;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Chenggggg on 2016/8/26.
@@ -16,9 +19,9 @@ import com.lssdjt.chenggggg.lssdjt.domain.TextJokeBean;
 public class TextJokeRecyclerAdapter extends RecyclerView.Adapter<TextJokeRecyclerAdapter.mViewHolder> {
 
     Context mContext;
-    public TextJokeBean mBean;
+    public ArrayList<TextJokeBean.TextBean> mBean;
 
-    public TextJokeRecyclerAdapter(Context context, TextJokeBean bean) {
+    public TextJokeRecyclerAdapter(Context context, ArrayList<TextJokeBean.TextBean> bean) {
         this.mContext = context;
         this.mBean = bean;
     }
@@ -32,19 +35,23 @@ public class TextJokeRecyclerAdapter extends RecyclerView.Adapter<TextJokeRecycl
 
     @Override
     public void onBindViewHolder(mViewHolder holder, int position) {
-        holder.mTextView.setText(mBean.showapi_res_body.contentlist.get(position).text);
+        holder.mText.setText(mBean.get(position).text);
+        holder.mTitle.setText(mBean.get(position).title);
     }
 
     @Override
     public int getItemCount() {
-        return mBean.showapi_res_body.contentlist.size();
+        return mBean.size();
     }
 
     public class mViewHolder extends RecyclerView.ViewHolder{
-        TextView mTextView;
+        TextView mTitle;
+        ExpandableTextView mText;
         public mViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.tv_joke_title);
+            mTitle = (TextView) itemView.findViewById(R.id.tv_joke_title);
+            mText = (ExpandableTextView) itemView.findViewById(R.id.tv_joke_content);
+
         }
     }
 }

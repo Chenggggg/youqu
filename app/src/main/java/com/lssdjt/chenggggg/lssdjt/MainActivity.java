@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mViewpager = (ViewPager) findViewById(R.id.vp_main);
         mNavView = (NavigationView)findViewById(R.id.nav_view);
-        mFAB = (FloatingActionButton) findViewById(R.id.fab_main);
     }
 
     private void initFragment() {
@@ -111,8 +110,5 @@ public class MainActivity extends AppCompatActivity {
             return mFragments.size();
         }
     }
-
-
-    
 }
 

@@ -3,19 +3,11 @@
               xmlns:cardview="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="120dp"
-              android:orientation="horizontal"
-              android:padding="10dp">
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        cardview:cardCornerRadius="4dp"
-        cardview:cardElevation="4dp">
 
-        <include layout="@layout/textjoke_info_layout"></include>
+    <include layout="@layout/textjoke_info_layout"></include>
 
-    </android.support.v7.widget.CardView>
 
 </LinearLayout>
