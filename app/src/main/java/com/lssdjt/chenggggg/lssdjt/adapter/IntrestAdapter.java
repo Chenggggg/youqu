@@ -19,6 +19,7 @@ public class IntrestAdapter extends PagerAdapter {
     private Context mContext;
     private RecyclerView mRecyclerView;
 
+
     public IntrestAdapter(Context context) {
         this.mContext = context;
     }
@@ -45,10 +46,13 @@ public class IntrestAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = getTextJokeView();
-        container.addView(view);
+        View view = null;
         switch (position) {
             case 0:
+                //选中再加载数据
+
+                view = getTextJokeView();
+                container.addView(view);
                 return view;
             case 1:
 
@@ -62,6 +66,7 @@ public class IntrestAdapter extends PagerAdapter {
     }
 
 
+
     public View getTextJokeView() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.textjoke_layout,null);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_layout);
@@ -71,7 +76,6 @@ public class IntrestAdapter extends PagerAdapter {
         mRecyclerView.setAdapter(new TextJokeRecyclerAdapter(mContext));
         return view;
     }
-
 
 
 }
