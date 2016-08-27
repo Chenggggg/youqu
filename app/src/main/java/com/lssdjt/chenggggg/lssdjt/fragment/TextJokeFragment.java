@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lssdjt.chenggggg.lssdjt.R;
-import com.lssdjt.chenggggg.lssdjt.adapter.TextJokeRecyclerAdapter;
 
 /**
  * Created by Chenggggg on 2016/8/26.
@@ -48,7 +47,7 @@ public class TextJokeFragment extends Fragment{
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(new TextJokeRecyclerAdapter(getContext()));
+//        mRecyclerView.setAdapter(new TextJokeRecyclerAdapter(getContext()));
     }
 
 

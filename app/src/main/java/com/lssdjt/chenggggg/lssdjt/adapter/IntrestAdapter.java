@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lssdjt.chenggggg.lssdjt.R;
+import com.lssdjt.chenggggg.lssdjt.dataengine.JokeDataFactory;
+import com.lssdjt.chenggggg.lssdjt.domain.TextJokeBean;
 
 /**
  * Created by Chenggggg on 2016/8/26.
@@ -18,10 +20,14 @@ public class IntrestAdapter extends PagerAdapter {
     private String[] mTabs = new String[]{"段子","趣图","动图"};
     private Context mContext;
     private RecyclerView mRecyclerView;
+    public static JokeDataFactory mJokeDataFatory;
 
 
     public IntrestAdapter(Context context) {
         this.mContext = context;
+        if (mJokeDataFatory == null) {
+            mJokeDataFatory = new JokeDataFactory();
+        }
     }
 
     @Override
@@ -50,10 +56,15 @@ public class IntrestAdapter extends PagerAdapter {
         switch (position) {
             case 0:
                 //选中再加载数据
+                TextJokeBean mData = mJokeDataFatory.getDataFromWeb();
+                if(mData != null){
+                    view = getTextJokeView(mData);
+                    container.addView(view);
+                    return view;
+                }else{
+                    return null;
+                }
 
-                view = getTextJokeView();
-                container.addView(view);
-                return view;
             case 1:
 
             case 2:
@@ -67,13 +78,13 @@ public class IntrestAdapter extends PagerAdapter {
 
 
 
-    public View getTextJokeView() {
+    public View getTextJokeView(TextJokeBean bean) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.textjoke_layout,null);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_layout);
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(new TextJokeRecyclerAdapter(mContext));
+        mRecyclerView.setAdapter(new TextJokeRecyclerAdapter(mContext,bean));
         return view;
     }
 

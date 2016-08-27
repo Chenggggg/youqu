@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lssdjt.chenggggg.lssdjt.R;
+import com.lssdjt.chenggggg.lssdjt.domain.TextJokeBean;
 
 /**
  * Created by Chenggggg on 2016/8/26.
@@ -15,9 +16,11 @@ import com.lssdjt.chenggggg.lssdjt.R;
 public class TextJokeRecyclerAdapter extends RecyclerView.Adapter<TextJokeRecyclerAdapter.mViewHolder> {
 
     Context mContext;
+    public TextJokeBean mBean;
 
-    public TextJokeRecyclerAdapter(Context context) {
+    public TextJokeRecyclerAdapter(Context context, TextJokeBean bean) {
         this.mContext = context;
+        this.mBean = bean;
     }
 
     @Override
@@ -29,12 +32,12 @@ public class TextJokeRecyclerAdapter extends RecyclerView.Adapter<TextJokeRecycl
 
     @Override
     public void onBindViewHolder(mViewHolder holder, int position) {
-        holder.mTextView.setText("今天真特么冷啊！！~！~@！@#");
+        holder.mTextView.setText(mBean.showapi_res_body.contentlist.get(position).text);
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return mBean.showapi_res_body.contentlist.size();
     }
 
     public class mViewHolder extends RecyclerView.ViewHolder{
