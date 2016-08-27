@@ -20,7 +20,7 @@ public class JokeDataFactory {
     private TextJokeBean mJokeData;
     private static final String TAG = "JokeDataFactory";
     private TextJokeBean mNewJokeData;
-    public static int page=1;
+    public static int page = 1;
     private Context mContext;
 
     public JokeDataFactory(Context context) {
@@ -32,7 +32,7 @@ public class JokeDataFactory {
         mGson = new Gson();
     }
 
-    public TextJokeBean getDataFromWeb(){
+    public TextJokeBean getDataFromWeb() {
         try {
             String result = new GetTextJokeSyncTask().execute().get();
             mJokeData = proccessJokeJsonData(result);
@@ -42,16 +42,16 @@ public class JokeDataFactory {
         return mJokeData;
     }
 
-    public TextJokeBean getMoreData(){
+    public TextJokeBean getMoreData() {
         page = page + 1;
         try {
             String result = new GetTextJokeSyncTask().execute().get();
             mNewJokeData = proccessJokeJsonData(result);
-            if(mNewJokeData == null || mNewJokeData.showapi_res_body.allPages == page){
+            if (mNewJokeData == null || mNewJokeData.showapi_res_body.allPages == page) {
                 return null;
             }
             //写入缓存
-            CacheUtils.setCache(Constant.TEXT_JOKE_URL,result,mContext);
+            CacheUtils.setCache(Constant.TEXT_JOKE_URL, result, mContext);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,11 +60,11 @@ public class JokeDataFactory {
 
     }
 
-    public TextJokeBean refreshData(){
+    public TextJokeBean refreshData() {
         try {
             String result = new GetTextJokeSyncTask().execute().get();
             mNewJokeData = proccessJokeJsonData(result);
-            if(mNewJokeData.showapi_res_body.allNum == mJokeData.showapi_res_body.allNum){
+            if (mNewJokeData.showapi_res_body.allNum == mJokeData.showapi_res_body.allNum) {
                 return null;
             }
         } catch (Exception e) {
@@ -74,23 +74,25 @@ public class JokeDataFactory {
     }
 
 
-    private class GetTextJokeSyncTask extends AsyncTask<String,Void,String> {
+    private class GetTextJokeSyncTask extends AsyncTask<String, Void, String> {
         String currentPage = String.valueOf(page);
+
         @Override
         protected String doInBackground(String... voids) {
-            final String res=new ShowApiRequest(Constant.TEXT_JOKE_URL, Constant.ShowAPI_ID, Constant.ShowAPI_SECRET)
+            String res = new ShowApiRequest(Constant.TEXT_JOKE_URL, Constant.ShowAPI_ID, Constant.ShowAPI_SECRET)
                     .addTextPara("time", mDateString)
                     .addTextPara("page", currentPage)
                     .addTextPara("maxResult", "20")
                     .post();
-
-            Log.d(TAG, "doInBackground: res = " + res +"currentPage" + currentPage);
+            res = res.replaceAll("<p>", "");
+            res = res.replaceAll("</p>", "");
+            Log.d(TAG, "doInBackground: res = " + res + "currentPage" + currentPage);
             return res;
         }
     }
 
 
-    public TextJokeBean proccessJokeJsonData(String json){
+    public TextJokeBean proccessJokeJsonData(String json) {
         TextJokeBean result = mGson.fromJson(json, TextJokeBean.class);
         return result;
     }
