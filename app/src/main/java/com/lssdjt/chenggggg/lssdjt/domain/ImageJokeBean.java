@@ -15,6 +15,9 @@ public class ImageJokeBean {
         public int allPages;
         public int currentPage;
 
+        public int maxResult;
+
+        public ArrayList<ImageJokeItem> contentlist;
         @Override
         public String toString() {
             return "ImageJoke{" +
@@ -26,19 +29,16 @@ public class ImageJokeBean {
                     '}';
         }
 
-        public int maxResult;
-        public ArrayList<ImageBean> contentlist;
-
     }
 
-    public class ImageBean {
+    public class ImageJokeItem {
         public String ct;
         public String id;
         public String img;
 
         @Override
         public String toString() {
-            return "ImageBean{" +
+            return "ImageJokeItem{" +
                     "ct='" + ct + '\'' +
                     ", id='" + id + '\'' +
                     ", img='" + img + '\'' +

@@ -21,4 +21,9 @@
         <item name="android:textSize">30dp</item>
     </style>
 
+    <style name="ColorNavigationDrawerTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@color/colorBluePrimaryDark</item>
+    </style>
 </resources>
