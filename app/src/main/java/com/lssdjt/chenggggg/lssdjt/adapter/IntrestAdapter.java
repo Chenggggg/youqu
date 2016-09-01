@@ -10,7 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.lssdjt.chenggggg.lssdjt.R;
 import com.lssdjt.chenggggg.lssdjt.dataengine.JokeDataFactory;
 import com.lssdjt.chenggggg.lssdjt.domain.Constant;
@@ -34,9 +36,10 @@ public class IntrestAdapter extends PagerAdapter {
     private TextJokeRecyclerAdapter mTextJokeAdapter;
     private TextJokeBean moreData;
     private FloatingActionButton mFAB;
-    private RecyclerView mImageRecylerView;
+    private XRecyclerView mImageRecylerView;
     private ImageJokeRecyclerAdapter mImageRecylerViewAdapter;
     private ArrayList<ImageJokeBean.ImageJokeItem> mImageJokeList;
+    private ImageJokeBean moreImageData;
 
 
     public IntrestAdapter(Context context) {
@@ -99,7 +102,7 @@ public class IntrestAdapter extends PagerAdapter {
                 }
             case 1:
                 //先从网络加载
-                ImageJokeBean mImageJoketData = mJokeDataFatory.getImageJokeDataFromWeb();
+                ImageJokeBean mImageJoketData = mJokeDataFatory.getImageJokeDataFromWeb(1);
                 if(mImageJoketData != null){
                     mImageJokeList = mImageJoketData.showapi_res_body.contentlist;
                     View view1 = getImageJokeView(mImageJokeList);
@@ -162,15 +165,47 @@ public class IntrestAdapter extends PagerAdapter {
         return view;
     }
 
-    public View getImageJokeView(ArrayList<ImageJokeBean.ImageJokeItem> mImageJokeList) {
+    public View getImageJokeView(final ArrayList<ImageJokeBean.ImageJokeItem> mImageJokeList) {
 
+        //初始化
         View view = LayoutInflater.from(mContext).inflate(R.layout.imagejoke_layout, null);
         mImageRecylerViewAdapter = new ImageJokeRecyclerAdapter(mContext,mImageJokeList);
-        mImageRecylerView = (RecyclerView) view.findViewById(R.id.recyclerview_layout);
+        mImageRecylerView = (XRecyclerView) view.findViewById(R.id.recyclerview_layout);
         LinearLayoutManager mImageManager = new LinearLayoutManager(mContext);
         mImageManager.setOrientation(LinearLayoutManager.VERTICAL);
         mImageRecylerView.setLayoutManager(mImageManager);
         mImageRecylerView.setAdapter(mImageRecylerViewAdapter);
+
+        //监听设置
+        mImageRecylerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                moreImageData = mJokeDataFatory.getMoreImageJokeData();
+                if(moreImageData == null || moreImageData.showapi_res_body.contentlist.get(1).ct.equals(mImageJokeList.get(1).ct)){
+                    Toast.makeText(mContext,"已经是最新的数据",Toast.LENGTH_SHORT).show();
+                    mImageRecylerView.setEnabled(false);
+
+                }else{
+                    mImageJokeList.addAll(0,moreImageData.showapi_res_body.contentlist);
+                    Snackbar.make(mImageRecylerView,"更新20条数据",Snackbar.LENGTH_SHORT).show();
+                }
+                mImageRecylerViewAdapter.notifyDataSetChanged();
+                mImageRecylerView.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                moreImageData = mJokeDataFatory.getMoreImageJokeData();
+                if(moreImageData == null){
+                    Snackbar.make(mImageRecylerView,"没有更多的的数据",Snackbar.LENGTH_SHORT).show();
+                }else{
+                    mImageJokeList.addAll(mImageJokeList.size()-1,moreImageData.showapi_res_body.contentlist);
+                    Snackbar.make(mImageRecylerView,"加载20条数据",Snackbar.LENGTH_SHORT).show();
+                }
+                mImageRecylerViewAdapter.notifyDataSetChanged();
+                mImageRecylerView.loadMoreComplete();
+            }
+        });
         return view;
     }
 }

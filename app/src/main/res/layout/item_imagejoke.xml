@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:cardview="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="@color/white"
               android:padding="15dp">
@@ -21,9 +21,9 @@
         android:id="@+id/iv_joke_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_below="@id/tv_joke_title"
         android:layout_gravity="top"
         android:src="@drawable/topinfo_ban_bg"/>
 
 
-</LinearLayout>
+</RelativeLayout>

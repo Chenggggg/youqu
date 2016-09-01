@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lssdjt.chenggggg.lssdjt.R;
 import com.lssdjt.chenggggg.lssdjt.domain.ImageJokeBean;
 
@@ -36,6 +38,11 @@ public class ImageJokeRecyclerAdapter extends RecyclerView.Adapter<ImageJokeRecy
     @Override
     public void onBindViewHolder(mImageJokeViewHolder holder, int position) {
         holder.mTextView.setText(mDataList.get(position).title);
+        Glide.with(mContext)
+                .load(mDataList.get(position).img)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.mImageView);
 
     }
 

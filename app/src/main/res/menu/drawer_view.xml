@@ -22,17 +22,18 @@
             android:icon="@drawable/ic_headset"
             android:title="新闻中心" />
         <item
-            android:id="@+id/nav_interested"
-            android:icon="@drawable/ic_event"
-            android:title="幽默趣图" />
-        <item
             android:id="@+id/nav_picshop"
             android:icon="@drawable/ic_dashboard"
-            android:title="美图大全" />
+            android:title="美女壁纸" />
         <item
             android:id="@+id/nav_wechat"
             android:icon="@drawable/ic_forum"
-            android:title="微信精选" />
+            android:title="虎扑体育" />
+        <item
+            android:id="@+id/nav_interested"
+            android:icon="@drawable/ic_event"
+            android:title="幽默趣图" />
+
     </group>
 
     <item android:title=" ">
