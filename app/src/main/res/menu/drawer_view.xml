@@ -26,7 +26,7 @@
             android:icon="@drawable/ic_dashboard"
             android:title="美女壁纸" />
         <item
-            android:id="@+id/nav_wechat"
+            android:id="@+id/nav_hupu"
             android:icon="@drawable/ic_forum"
             android:title="虎扑体育" />
         <item
@@ -38,6 +38,9 @@
 
     <item android:title=" ">
         <menu>
+
+            <item android:icon="@drawable/ic_dashboard"
+                  android:title="检查更新"/>
             <item
                 android:icon="@drawable/ic_dashboard"
                 android:title="关于" />

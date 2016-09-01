@@ -32,12 +32,6 @@ public class JokeDataFactory {
         this.mContext = context;
         mDateString = "2015-08-27";
         mGson = new Gson();
-//        if(CacheUtils.getCache("ImagePage",mContext)!= null){
-//           ImagePage = Integer.parseInt(CacheUtils.getCache("ImagePage",mContext));
-//        }else {
-//            ImagePage = 1;
-//            CacheUtils.setCache("ImagePage", "1",mContext);
-//        }
     }
 
     public TextJokeBean getTextJokeDataFromWeb() {

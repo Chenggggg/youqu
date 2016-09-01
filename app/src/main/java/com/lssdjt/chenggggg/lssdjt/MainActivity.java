@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -43,24 +42,20 @@ public class MainActivity extends AppCompatActivity {
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_newscenter:
-                        Snackbar.make(mNavView,"newscenter",Snackbar.LENGTH_SHORT).show();
                         mViewpager.setCurrentItem(0);
                         mDrawerLayout.closeDrawers();
                         break;
-                    case R.id.nav_interested:
-                        Snackbar.make(mNavView,"nav_interested",Snackbar.LENGTH_SHORT).show();
+                    case R.id.nav_hupu:
                         mViewpager.setCurrentItem(1);
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_picshop:
-                        Snackbar.make(mNavView,"nav_picshop",Snackbar.LENGTH_SHORT).show();
                         mViewpager.setCurrentItem(2);
                         mDrawerLayout.closeDrawers();
                         break;
-                    case R.id.nav_wechat:
-                        Snackbar.make(mNavView,"nav_wechat",Snackbar.LENGTH_SHORT).show();
+                    case R.id.nav_interested:
                         mViewpager.setCurrentItem(3);
                         mDrawerLayout.closeDrawers();
                         break;
@@ -78,22 +73,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
         mViewpager = (ViewPager) findViewById(R.id.vp_main);
-        mNavView = (NavigationView)findViewById(R.id.nav_view);
+        mNavView = (NavigationView) findViewById(R.id.nav_view);
     }
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            mFragments.add(new IntrestingFragment());
-        }
+        mFragments.add(new IntrestingFragment());
+        mFragments.add(new SportNewsFragment());
+        mFragments.add(new IntrestingFragment());
+        mFragments.add(new IntrestingFragment());
+
     }
 
-    private class mAdapter extends FragmentPagerAdapter{
+    private class mAdapter extends FragmentPagerAdapter {
 
         public mAdapter(FragmentManager fm) {
             super(fm);
