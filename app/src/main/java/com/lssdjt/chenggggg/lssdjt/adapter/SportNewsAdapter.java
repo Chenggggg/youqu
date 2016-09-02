@@ -39,7 +39,7 @@ public class SportNewsAdapter extends RecyclerView.Adapter<SportNewsAdapter.mVie
     public void onBindViewHolder(mViewHolder holder, int position) {
         Glide.with(mContext).load(mNewsList.get(position).picUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.mImageView);
         holder.title.setText(mNewsList.get(position).title);
-        holder.desc.setText(mNewsList.get(position).description);
+        holder.desc.setText(mNewsList.get(position).ctime + "    " + mNewsList.get(position).description);
     }
 
     @Override

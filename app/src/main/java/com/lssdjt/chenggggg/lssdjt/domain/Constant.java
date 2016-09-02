@@ -11,5 +11,7 @@ public class Constant {
     public static String TEXT_JOKE_URL = "http://route.showapi.com/341-1";
     public static String IMAGE_JOKE_URL = "http://route.showapi.com/341-2";
 
+    public static String SPORT_NEWS_URL = "http://route.showapi.com/196-1";
+
 
 }
