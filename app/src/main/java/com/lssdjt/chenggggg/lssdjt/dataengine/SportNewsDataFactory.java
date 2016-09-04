@@ -15,18 +15,27 @@ import com.show.api.ShowApiRequest;
  */
 public class SportNewsDataFactory {
 
+    private static SportNewsDataFactory mFactory;
     private int Page = 1;
     private static final String TAG = "SportNewsDataFactory";
     private final Gson mGson;
     private SportNewsBean mData;
     private SportNewsBean mMoreSportData;
-    private Context mContext;
+    private static Context mContext;
     private SportNewsBean mNewestData;
+    private String mHtmlData;
 
-
-    public SportNewsDataFactory(Context context) {
+    private SportNewsDataFactory(Context context) {
         this.mContext = context;
         mGson = new Gson();
+    }
+
+    public static SportNewsDataFactory getSportNewsDataFactory(){
+        if(mFactory == null){
+            mFactory = new SportNewsDataFactory(mContext);
+            return mFactory;
+        }
+        return mFactory;
     }
 
     private class GetSportDataAsyncTask extends AsyncTask<String, Void, String> {
@@ -100,4 +109,29 @@ public class SportNewsDataFactory {
         }
     }
 
+    private class getSportParseData extends AsyncTask<String ,Void,String>{
+
+        String Url;
+
+        public getSportParseData(String url) {
+            this.Url = url;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            final String res=new ShowApiRequest( "http://route.showapi.com/883-1",  Constant.ShowAPI_ID,  Constant.ShowAPI_SECRET)
+                    .addTextPara("url", Url)
+                    .post();
+            return res;
+        }
+    }
+
+    public String getSportParseData(String url){
+        try {
+            mHtmlData = new getSportParseData(url).execute(url).get();
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mHtmlData;
+    }
 }

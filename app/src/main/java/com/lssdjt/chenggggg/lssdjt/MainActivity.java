@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.lssdjt.chenggggg.lssdjt.fragment.IntrestingFragment;
+import com.lssdjt.chenggggg.lssdjt.fragment.SportNewsFragment;
 
 import java.util.ArrayList;
 

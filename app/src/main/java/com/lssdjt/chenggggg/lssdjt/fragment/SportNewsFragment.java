@@ -1,7 +1,9 @@
-package com.lssdjt.chenggggg.lssdjt;
+package com.lssdjt.chenggggg.lssdjt.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.lssdjt.chenggggg.lssdjt.R;
+import com.lssdjt.chenggggg.lssdjt.SportNewsDetailActivity;
 import com.lssdjt.chenggggg.lssdjt.adapter.SportNewsAdapter;
-import com.lssdjt.chenggggg.lssdjt.domain.SportNewsBean;
 import com.lssdjt.chenggggg.lssdjt.dataengine.SportNewsDataFactory;
+import com.lssdjt.chenggggg.lssdjt.domain.SportNewsBean;
+import com.lssdjt.chenggggg.lssdjt.listener.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -30,7 +35,7 @@ public class SportNewsFragment extends android.support.v4.app.Fragment {
     private SportNewsAdapter mNewsAdapter;
 
     public SportNewsFragment() {
-        mFatory = new SportNewsDataFactory(getContext());
+        mFatory = SportNewsDataFactory.getSportNewsDataFactory();
         mNewsList = new ArrayList<SportNewsBean.SportNews>();
     }
 
@@ -49,7 +54,7 @@ public class SportNewsFragment extends android.support.v4.app.Fragment {
         LinearLayoutManager mImageManager = new LinearLayoutManager(getContext());
         mImageManager.setOrientation(LinearLayoutManager.VERTICAL);
         mXRecylerView.setLayoutManager(mImageManager);
-
+        //刷新|加载更多
         mXRecylerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -80,6 +85,24 @@ public class SportNewsFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        //点击事件（新建类实现RecyclerItemClickListener.OnItemClickListener()接口）
+        mXRecylerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mXRecylerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("URL",mNewsList.get(position).url);
+                bundle.putString("TITLE",mNewsList.get(position).title);
+                bundle.putString("IMAGEURL",mNewsList.get(position).picUrl);
+                Intent intent = new Intent(getActivity(),SportNewsDetailActivity.class);
+                intent.putExtra("BUNDLE",bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Snackbar.make(mXRecylerView,"长按item",Snackbar.LENGTH_SHORT).show();
+            }
+        }));
 
     }
 

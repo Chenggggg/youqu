@@ -1,4 +1,4 @@
-package com.lssdjt.chenggggg.lssdjt;
+package com.lssdjt.chenggggg.lssdjt.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
