@@ -31,12 +31,18 @@ public class IntrestingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        initView();
+        mView = LayoutInflater.from(getContext()).inflate(R.layout.intrested_main_layout,null);
         return mView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
+
     private void initView() {
-        mView = LayoutInflater.from(getContext()).inflate(R.layout.intrested_main_layout,null,false);
+
         mViewPager = (ViewPager) mView.findViewById(R.id.vp_main);
         mTab = (TabLayout) mView.findViewById(R.id.tab_intrested);
         mTab.setTabGravity(TabLayout.GRAVITY_FILL);

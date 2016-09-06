@@ -1,5 +1,6 @@
 package com.lssdjt.chenggggg.lssdjt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.lssdjt.chenggggg.lssdjt.fragment.IntrestingFragment;
+import com.lssdjt.chenggggg.lssdjt.fragment.NewsCenterFragment;
 import com.lssdjt.chenggggg.lssdjt.fragment.SportNewsFragment;
 
 import java.util.ArrayList;
@@ -60,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
                         mViewpager.setCurrentItem(3);
                         mDrawerLayout.closeDrawers();
                         break;
+                    case R.id.action_settings:
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
+                        break;
+
                 }
                 return false;
             }
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(new IntrestingFragment());
+        mFragments.add(new NewsCenterFragment());
         mFragments.add(new SportNewsFragment());
         mFragments.add(new IntrestingFragment());
         mFragments.add(new IntrestingFragment());
