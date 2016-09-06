@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Chenggggg on 2016/9/6.
  */
-public class NewsCenterFragment extends Fragment {
+public class PhotoCenterFragment extends android.support.v4.app.Fragment {
 
     private View mInflate;
     private ViewPager mViewPager;
@@ -33,7 +33,7 @@ public class NewsCenterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mInflate = inflater.inflate(R.layout.newscenter_layout,null);
+        mInflate = inflater.inflate(R.layout.photo_center_layout,null);
         return mInflate;
     }
 
@@ -58,13 +58,13 @@ public class NewsCenterFragment extends Fragment {
     private void initFragment(){
 
         mFragments = new ArrayList<Fragment>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 4; i++) {
             mFragments.add(new newsDetailFragment(i));
         }
 
     }
 
-    private class mViewPagerAdapter extends FragmentPagerAdapter{
+    private class mViewPagerAdapter extends FragmentPagerAdapter {
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -86,5 +86,6 @@ public class NewsCenterFragment extends Fragment {
             return mFragments.size();
         }
     }
+
 
 }

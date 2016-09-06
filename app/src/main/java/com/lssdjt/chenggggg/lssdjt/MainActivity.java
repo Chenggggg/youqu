@@ -18,6 +18,7 @@ import android.view.View;
 
 import com.lssdjt.chenggggg.lssdjt.fragment.IntrestingFragment;
 import com.lssdjt.chenggggg.lssdjt.fragment.NewsCenterFragment;
+import com.lssdjt.chenggggg.lssdjt.fragment.PhotoCenterFragment;
 import com.lssdjt.chenggggg.lssdjt.fragment.SportNewsFragment;
 
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mFragments = new ArrayList<>();
         mFragments.add(new NewsCenterFragment());
         mFragments.add(new SportNewsFragment());
-        mFragments.add(new IntrestingFragment());
+        mFragments.add(new PhotoCenterFragment());
         mFragments.add(new IntrestingFragment());
 
     }

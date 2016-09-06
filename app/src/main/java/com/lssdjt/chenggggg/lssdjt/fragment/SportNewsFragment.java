@@ -43,7 +43,6 @@ public class SportNewsFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mInflate = inflater.inflate(R.layout.sport_news_layout, null);
-
         return mInflate;
     }
 
