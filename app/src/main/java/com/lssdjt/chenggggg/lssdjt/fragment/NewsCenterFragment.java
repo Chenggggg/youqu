@@ -1,5 +1,6 @@
 package com.lssdjt.chenggggg.lssdjt.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lssdjt.chenggggg.lssdjt.R;
+import com.lssdjt.chenggggg.lssdjt.dataengine.NewsCenterDataFactory;
+import com.lssdjt.chenggggg.lssdjt.domain.NewsChanelBean;
 
 import java.util.ArrayList;
 
@@ -20,10 +23,19 @@ import java.util.ArrayList;
  */
 public class NewsCenterFragment extends Fragment {
 
+    private Context mContext;
     private View mInflate;
     private ViewPager mViewPager;
     private TabLayout mTab;
     private ArrayList<Fragment> mFragments;
+    private NewsCenterDataFactory mFactory;
+    private static final String TAG = "NewsCenterFragment";
+    private NewsChanelBean mChanelData;
+
+    public NewsCenterFragment(Context context) {
+        super();
+        this.mContext = context;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,17 +45,15 @@ public class NewsCenterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mInflate = inflater.inflate(R.layout.newscenter_layout,null);
+        mInflate = inflater.inflate(R.layout.newscenter_layout, null);
+        initData();
+
+        initView();
+        initFragment(mContext);
+        initAdapter();
         return mInflate;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initView();
-        initFragment();
-        initAdapter();
-    }
 
     private void initAdapter() {
         mViewPager.setAdapter(new mViewPagerAdapter(getFragmentManager()));
@@ -51,24 +61,32 @@ public class NewsCenterFragment extends Fragment {
     }
 
     private void initView() {
-        mViewPager = (ViewPager)mInflate.findViewById(R.id.vp_photocenter);
-        mTab = (TabLayout)mInflate.findViewById(R.id.tab_photocenter);
+        mViewPager = (ViewPager) mInflate.findViewById(R.id.vp_photocenter);
+        mTab = (TabLayout) mInflate.findViewById(R.id.tab_photocenter);
+        mTab.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
-    private void initFragment(){
+    private void initFragment(Context context) {
 
         mFragments = new ArrayList<Fragment>();
-        for (int i = 0; i < 9; i++) {
-            mFragments.add(new newsDetailFragment(i));
+        if(mChanelData != null){
+            for (int i = 0; i < 13; i++) {  //13
+                mFragments.add(new newsDetailFragment(mContext, mChanelData.getShowapi_res_body().getChannelList().get(i).getChannelId()));
+            }
         }
-
     }
 
-    private class mViewPagerAdapter extends FragmentPagerAdapter{
+    private void initData() {
+        mFactory = NewsCenterDataFactory.getNewsCenterDataFactoryInstance();
+        mChanelData = mFactory.getNewsChannelData();
+    }
+
+    private class mViewPagerAdapter extends FragmentPagerAdapter {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return super.getPageTitle(position);
+            return mChanelData.getShowapi_res_body().getChannelList().get(position).getName();
         }
 
         public mViewPagerAdapter(FragmentManager fm) {
@@ -84,6 +102,10 @@ public class NewsCenterFragment extends Fragment {
         @Override
         public int getCount() {
             return mFragments.size();
+        }
+
+        public void getNewsData() {
+
         }
     }
 

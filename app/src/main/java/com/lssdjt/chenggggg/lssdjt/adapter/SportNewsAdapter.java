@@ -44,7 +44,10 @@ public class SportNewsAdapter extends RecyclerView.Adapter<SportNewsAdapter.mVie
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        if(mNewsList != null){
+            return mNewsList.size();
+        }
+        return 0;
     }
 
     public class mViewHolder extends RecyclerView.ViewHolder {

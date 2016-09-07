@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(new NewsCenterFragment());
+        mFragments.add(new NewsCenterFragment(getApplicationContext()));
         mFragments.add(new SportNewsFragment());
         mFragments.add(new PhotoCenterFragment());
         mFragments.add(new IntrestingFragment());

@@ -34,15 +34,17 @@ public class PhotoCenterFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mInflate = inflater.inflate(R.layout.photo_center_layout,null);
+
+        initView();
+        initFragment();
+        initAdapter();
         return mInflate;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initView();
-        initFragment();
-        initAdapter();
+
     }
 
     private void initAdapter() {
@@ -59,7 +61,7 @@ public class PhotoCenterFragment extends android.support.v4.app.Fragment {
 
         mFragments = new ArrayList<Fragment>();
         for (int i = 0; i < 4; i++) {
-            mFragments.add(new newsDetailFragment(i));
+            mFragments.add(new IntrestingFragment());
         }
 
     }

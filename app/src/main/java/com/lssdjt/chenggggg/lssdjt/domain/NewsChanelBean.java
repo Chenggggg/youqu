@@ -6,6 +6,15 @@ import java.util.List;
  * Created by Chenggggg on 2016/9/6.
  */
 public class NewsChanelBean {
+    @Override
+    public String toString() {
+        return "NewsChanelBean{" +
+                "showapi_res_code=" + showapi_res_code +
+                ", showapi_res_error='" + showapi_res_error + '\'' +
+                ", showapi_res_body=" + showapi_res_body +
+                '}';
+    }
+
     /**
      * showapi_res_code : 0
      * showapi_res_error :
@@ -47,6 +56,15 @@ public class NewsChanelBean {
     }
 
     public static class ShowapiResBodyBean {
+        @Override
+        public String toString() {
+            return "ShowapiResBodyBean{" +
+                    "totalNum=" + totalNum +
+                    ", ret_code=" + ret_code +
+                    ", channelList=" + channelList +
+                    '}';
+        }
+
         private int totalNum;
         private int ret_code;
         /**
@@ -81,6 +99,14 @@ public class NewsChanelBean {
         }
 
         public static class ChannelListBean {
+            @Override
+            public String toString() {
+                return "ChannelListBean{" +
+                        "channelId='" + channelId + '\'' +
+                        ", name='" + name + '\'' +
+                        '}';
+            }
+
             private String channelId;
             private String name;
 
